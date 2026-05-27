@@ -1,0 +1,84 @@
+<Window
+    x:Class="WinForgeShell.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="WinForge">
+
+    <Grid Loaded="RootGrid_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Custom Title Bar -->
+        <Grid Grid.Row="0" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Padding="12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Text="WinForge"
+                Style="{ThemeResource SubtitleTextBlockStyle}"
+                VerticalAlignment="Center"
+                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+
+            <!-- Connection status badge -->
+            <StackPanel
+                Grid.Column="1"
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                Spacing="6">
+                <Ellipse
+                    x:Name="StatusDot"
+                    Width="10"
+                    Height="10"
+                    Fill="#95a5a6"/>
+                <TextBlock
+                    x:Name="StatusText"
+                    Text="Disconnected"
+                    VerticalAlignment="Center"
+                    Style="{ThemeResource CaptionTextBlockStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- NavigationView + Content Frame -->
+        <NavigationView
+            Grid.Row="1"
+            x:Name="NavView"
+            IsSettingsVisible="False"
+            SelectionChanged="NavView_SelectionChanged"
+            PaneDisplayMode="Left">
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem
+                    Content="Workflows"
+                    Tag="Workflows">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8A5;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    Content="Plugins"
+                    Tag="Plugins">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE74C;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    Content="Events"
+                    Tag="Events">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE7C3;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="ContentFrame"/>
+        </NavigationView>
+    </Grid>
+</Window>

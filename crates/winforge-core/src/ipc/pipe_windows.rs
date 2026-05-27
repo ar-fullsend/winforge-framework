@@ -7,7 +7,9 @@ use std::time::Duration;
 
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::windows::named_pipe::{ClientOptions, NamedPipeClient, NamedPipeServer, ServerOptions};
-use tracing::{debug, info};
+use tracing::info;
+
+use super::framing::{read_frame, write_frame};
 
 use crate::error::{CoreError, CoreResult};
 
@@ -21,23 +23,13 @@ fn pipe_path(name: &str) -> String {
 }
 
 async fn send_msg(writer: &mut (impl AsyncWriteExt + Unpin), msg: &IpcMessage) -> CoreResult<()> {
-    let bytes = serde_json::to_vec(msg)?;
-    let len = bytes.len() as u32;
-    writer.write_all(&len.to_le_bytes()).await?;
-    writer.write_all(&bytes).await?;
-    Ok(())
+    let json = serde_json::to_string(msg)?;
+    write_frame(writer, &json).await
 }
 
 async fn recv_msg(reader: &mut (impl AsyncReadExt + Unpin)) -> CoreResult<IpcMessage> {
-    let mut len_buf = [0u8; 4];
-    reader.read_exact(&mut len_buf).await?;
-    let len = u32::from_le_bytes(len_buf) as usize;
-    if len == 0 || len > 64 * 1024 * 1024 {
-        return Err(CoreError::Ipc(format!("invalid frame length: {len}")));
-    }
-    let mut buf = vec![0u8; len];
-    reader.read_exact(&mut buf).await?;
-    Ok(serde_json::from_slice(&buf)?)
+    let json = read_frame(reader).await?;
+    Ok(serde_json::from_str(&json)?)
 }
 
 // ── IpcServer ────────────────────────────────────────────────────────────────

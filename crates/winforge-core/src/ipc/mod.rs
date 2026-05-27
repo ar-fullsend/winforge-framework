@@ -1,3 +1,5 @@
+pub mod framing;
+
 #[cfg(target_os = "windows")]
 #[path = "pipe_windows.rs"]
 mod pipe_impl;

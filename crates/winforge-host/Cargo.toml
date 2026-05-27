@@ -1,29 +1,24 @@
 [package]
-name = "winforge-cli"
-description = "Command-line interface for the WinForge framework"
+name = "winforge-host"
+description = "Host runtime that bridges the WinForge core to external shells over named pipes"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
 
-[[bin]]
-name = "winforge"
-path = "src/main.rs"
-
 [dependencies]
 winforge-core = { workspace = true }
 winforge-workflow = { workspace = true }
-winforge-host = { workspace = true }
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-serde_yaml = { workspace = true }
-toml = { workspace = true }
 thiserror = { workspace = true }
-anyhow = { workspace = true }
-clap = { workspace = true }
 tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }
+anyhow = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+tracing-subscriber = { workspace = true }

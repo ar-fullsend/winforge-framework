@@ -4,6 +4,7 @@ members = [
     "crates/winforge-cli",
     "crates/winforge-plugin",
     "crates/winforge-workflow",
+    "crates/winforge-host",
 ]
 resolver = "2"
 
@@ -58,3 +59,4 @@ hex = "0.4"
 winforge-core = { path = "crates/winforge-core" }
 winforge-plugin = { path = "crates/winforge-plugin" }
 winforge-workflow = { path = "crates/winforge-workflow" }
+winforge-host = { path = "crates/winforge-host" }

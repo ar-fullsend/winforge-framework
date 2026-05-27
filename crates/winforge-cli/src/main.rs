@@ -6,6 +6,7 @@ mod scaffold;
 
 use commands::{
     build::BuildArgs,
+    host::HostArgs,
     new::NewArgs,
     plugin::PluginArgs,
     run::RunArgs,
@@ -40,6 +41,8 @@ enum Commands {
     Plugin(PluginArgs),
     /// Manage and run workflows.
     Workflow(WorkflowArgs),
+    /// Start the WinForge host — connects to the WinUI 3 shell over named pipes.
+    Host(HostArgs),
 }
 
 fn main() -> Result<()> {
@@ -65,5 +68,6 @@ fn main() -> Result<()> {
         Commands::Build(args) => commands::build::run(args),
         Commands::Plugin(args) => commands::plugin::run(args),
         Commands::Workflow(args) => commands::workflow::run(args),
+        Commands::Host(args) => commands::host::run(args),
     }
 }
