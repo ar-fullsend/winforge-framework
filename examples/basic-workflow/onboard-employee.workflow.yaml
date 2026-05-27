@@ -1,0 +1,47 @@
+name: onboard-employee
+version: "1.0"
+description: Automates the new-employee onboarding sequence
+triggers:
+  - type: event
+    topic: hr.employee.created
+
+env:
+  COMPANY: "Acme Corp"
+
+steps:
+  - id: create-accounts
+    name: Create IT accounts
+    type: command
+    run: echo "Creating accounts for {{ event.employee_id }}"
+    timeout_secs: 60
+
+  - id: send-welcome-email
+    name: Send welcome email
+    type: event
+    emit:
+      topic: email.send
+      payload:
+        template: welcome
+        subject: "Welcome to Acme Corp!"
+    depends_on: [create-accounts]
+
+  - id: parallel-provisioning
+    name: Parallel hardware and access provisioning
+    type: parallel
+    depends_on: [create-accounts]
+    steps:
+      - id: provision-vpn
+        type: command
+        run: echo "Setting up VPN access"
+        timeout_secs: 30
+
+      - id: provision-laptop
+        type: command
+        run: echo "Provisioning laptop"
+        timeout_secs: 120
+
+  - id: complete
+    name: Onboarding complete
+    type: notify
+    message: "Onboarding complete for new employee!"
+    depends_on: [send-welcome-email, parallel-provisioning]

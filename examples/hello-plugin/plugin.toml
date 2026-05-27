@@ -1,0 +1,14 @@
+[plugin]
+name = "hello-plugin"
+version = "0.1.0"
+description = "A minimal example plugin that greets on startup"
+authors = ["WinForge Contributors"]
+entry_point = "target/release/hello_plugin.dll"
+
+[capabilities]
+requires = ["events:publish"]
+optional = ["ui:notify"]
+
+[events]
+emits = ["hello.greeted"]
+listens = ["app.startup"]
