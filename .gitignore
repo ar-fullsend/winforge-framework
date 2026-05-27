@@ -1,0 +1,110 @@
+# WinForge Framework - Comprehensive .gitignore
+
+# === Rust ===
+Cargo.lock
+**/target/
+**/*.rs.bk
+**/*.pdb
+
+# === .NET / C# / WinUI ===
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vs/
+.vscode/
+*.DotSettings.user
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Ww][Ii][Nn]32/
+[Aa]ny [Cc]pu/
+[Bb]uild[Ll]og.*
+[Bb]uild[Ll]og.*.log
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# === MSIX / Packaging ===n*.msix
+*.appx
+*.appxbundle
+*.appinstaller
+*.cer
+*.pfx
+
+# === Windows specific ===
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+# === IDEs & Editors ===
+.idea/
+*.swp
+*.swo
+*~
+
+# === Python (for scripting extensibility) ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === Node (if any web tooling or docs site) ===
+node_modules/
+.npm
+
+# === Logs & Temp ===
+*.log
+*.tmp
+*.temp
+*.bak
+
+# === OS generated ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# === WinForge specific ===
+winforge.toml.local
+.env
+secrets/
+*.key
+*.pem
