@@ -5,8 +5,8 @@ pub struct HelloPlugin {
 }
 
 impl HelloPlugin {
-    pub fn new(greeting: impl Into<String>) -> Self {
-        Self { greeting: greeting.into() }
+    pub fn new() -> Self {
+        Self { greeting: "Hello from hello-plugin!".to_string() }
     }
 }
 
@@ -35,3 +35,6 @@ impl Plugin for HelloPlugin {
         self
     }
 }
+
+// Generate the `wf_plugin_create` C export that WinForge's loader looks for.
+winforge_plugin::export_plugin!(HelloPlugin::new());

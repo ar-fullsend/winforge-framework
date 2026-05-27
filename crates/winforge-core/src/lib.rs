@@ -17,3 +17,5 @@ pub use actors::{Actor, ActorContext, ActorHandle, ActorSystem};
 pub use error::{CoreError, CoreResult};
 pub use events::{Event, EventBus, EventReceiver};
 pub use plugins::{Capability, Plugin, PluginHost, PluginManifest, PluginRegistry};
+pub use plugins::{load_plugin, verify_hash};
+pub use ipc::{IpcClient, IpcConnection, IpcMessage, IpcServer};

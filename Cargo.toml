@@ -47,6 +47,13 @@ async-trait = "0.1"
 dashmap = "6"
 once_cell = "1"
 
+# Dynamic plugin loading
+libloading = "0.8"
+
+# Cryptographic hash for plugin integrity verification
+sha2 = "0.10"
+hex = "0.4"
+
 # Internal crates
 winforge-core = { path = "crates/winforge-core" }
 winforge-plugin = { path = "crates/winforge-plugin" }

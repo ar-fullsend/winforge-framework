@@ -14,3 +14,6 @@ serde_json = { workspace = true }
 async-trait = { workspace = true }
 tracing = { workspace = true }
 anyhow = { workspace = true }
+
+# Required so plugins can implement the C ABI export macro
+libc = "0.2"

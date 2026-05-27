@@ -1,9 +1,9 @@
 //! WinForge Plugin SDK
 //!
 //! Provides the ergonomic surface for writing WinForge plugins. Import this crate
-//! in your plugin crate instead of `winforge-core` directly.
+//! instead of `winforge-core` directly.
 //!
-//! # Minimal plugin
+//! # Minimal statically-linked plugin
 //!
 //! ```rust,no_run
 //! use winforge_plugin::prelude::*;
@@ -27,6 +27,21 @@
 //!     fn as_any(&self) -> &dyn std::any::Any { self }
 //! }
 //! ```
+//!
+//! # Dynamic (DLL/SO) plugin
+//!
+//! Add `crate-type = ["cdylib"]` and call [`export_plugin!`]:
+//!
+//! ```rust,ignore
+//! use winforge_plugin::prelude::*;
+//!
+//! struct MyPlugin;
+//! // ... impl Plugin for MyPlugin ...
+//!
+//! winforge_plugin::export_plugin!(MyPlugin);
+//! ```
+
+pub mod abi;
 
 pub use winforge_core::{
     Capability, CoreError, CoreResult, Event, EventBus, EventReceiver, Plugin, PluginHost,
